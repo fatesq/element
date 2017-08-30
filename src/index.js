@@ -40,6 +40,7 @@ import Tabs from '../packages/tabs/index.js';
 import TabPane from '../packages/tab-pane/index.js';
 import Tag from '../packages/tag/index.js';
 import Tree from '../packages/tree/index.js';
+import CsTree from '../packages/cs-tree/index.js';
 import Alert from '../packages/alert/index.js';
 import Notification from '../packages/notification/index.js';
 import Slider from '../packages/slider/index.js';
@@ -107,6 +108,7 @@ const components = [
   TabPane,
   Tag,
   Tree,
+  CsTree,
   Alert,
   Slider,
   Icon,
@@ -204,6 +206,7 @@ module.exports = {
   TabPane,
   Tag,
   Tree,
+  CsTree,
   Alert,
   Notification,
   Slider,
