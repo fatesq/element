@@ -1,5 +1,6 @@
 <template>
   <div class="el-tree" :class="{ 'el-tree--highlight-current': highlightCurrent }">
+    <div v-if="onEditable">在编辑中</div>
     <cs-tree-node
       v-for="child in root.childNodes"
       :node="child"
@@ -126,12 +127,13 @@
     },
 
     methods: {
-      selectEditable(e) {
-        this.onEditable = !this.onEditable;
-      },
       filter(value) {
         if (!this.filterNodeMethod) throw new Error('[Tree] filterNodeMethod is required when filter');
         this.store.filter(value);
+      },
+      edit(value) {
+        console.log(999, value);
+        // this.onEditable = value;
       },
       getNodeKey(node, index) {
         const nodeKey = this.nodeKey;
