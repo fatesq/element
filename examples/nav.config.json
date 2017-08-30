@@ -40,6 +40,10 @@
           "groupName": "Basic",
           "list": [
             {
+              "path": "/cs-tree",
+              "title": "CsTree 自定义树形控件"
+            },
+            {
               "path": "/layout",
               "title": "Layout 布局"
             },
