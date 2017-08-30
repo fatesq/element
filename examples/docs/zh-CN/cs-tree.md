@@ -163,6 +163,10 @@
     watch: {
       filterText(val) {
         this.$refs.tree2.filter(val);
+      },
+      onEditable(val) {
+        /*console.log(111, val);*/
+        this.$refs.tree2.edit(val);
       }
     },
 
@@ -305,7 +309,6 @@
   :props="defaultProps"
   :filter-node-method="filterNode"
   :indent="15"
-  :on-editable="onEditable"
   ref="tree2"
   default-expand-all
   show-checkbox>
