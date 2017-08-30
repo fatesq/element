@@ -18,10 +18,20 @@
       margin-top: 20px;
     }
   }
+  .filter-tree {
+    margin-top: 20px;
+  }
+  .m-t {
+    margin-top: 20px;
+  }
+  .fl {
+    float: right;
+  }
 </style>
 
 <script>
-  const data = [{
+  const data = [
+    {
     label: '一级 1',
     children: [{
       label: '二级 1-1',
@@ -29,7 +39,8 @@
         label: '三级 1-1-1'
       }]
     }]
-  }, {
+  }, 
+  {
     label: '一级 2',
     children: [{
       label: '二级 2-1',
@@ -42,7 +53,8 @@
         label: '三级 2-2-1'
       }]
     }]
-  }, {
+  }, 
+  {
     label: '一级 3',
     children: [{
       label: '二级 3-1',
@@ -55,7 +67,8 @@
         label: '三级 3-2-1'
       }]
     }]
-  }];
+  }
+  ];
 
   const data2 = [{
     id: 1,
@@ -141,6 +154,10 @@
     children: 'children',
     label: 'label'
   };
+  
+  const config = {};
+
+  const onEditable = false;
 
   export default {
     watch: {
@@ -150,6 +167,9 @@
     },
 
     methods: {
+      editTree() {
+        this.onEditable = !this.onEditable;
+      },
       handleCheckChange(data, checked, indeterminate) {
         console.log(data, checked, indeterminate);
       },
@@ -243,10 +263,12 @@
         data3,
         regions,
         defaultProps,
+        config,
         props,
         defaultCheckedKeys: [5],
         defaultExpandedKeys: [2, 3],
-        filterText: ''
+        filterText: '',
+        onEditable
       };
     }
   };
@@ -262,63 +284,106 @@
 
 ::: demo
 ```html
-<el-cs-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-cs-tree>
+<el-row>
+  <el-col :span="24">
+    <el-button type="primary" class="fl" @click="editTree()">
+      <span v-if="!onEditable">编辑</span>
+      <span v-if="onEditable">取消编辑</span>
+    </el-button>
+  </el-col>
+</el-row>
+
+<el-input
+  placeholder="输入关键字进行过滤"
+  v-model="filterText"
+  class="m-t">
+</el-input>
+<!-- <el-cs-tree :data="data" :props="defaultProps" :config="config" @node-click="handleNodeClick"></el-cs-tree> -->
+<el-tree
+  class="filter-tree"
+  :data="data2"
+  :props="defaultProps"
+  :filter-node-method="filterNode"
+  :indent="15"
+  :on-editable="onEditable"
+  ref="tree2"
+  default-expand-all
+  show-checkbox>
+</el-tree>
 
 <script>
   export default {
+    watch: {
+      filterText(val) {
+        this.$refs.tree2.filter(val);
+      }
+    },
+
+    methods: {
+      filterNode(value, data) {
+        if (!value) return true;
+        return data.label.indexOf(value) !== -1;
+      },
+      editTree() {
+        this.onEditable = !this.onEditable;
+      }
+    },
+
     data() {
       return {
-        data: [{
-          label: '一级 1',
-          children: [{
-            label: '二级 1-1',
+        filterText: '',
+        data2: [
+          {
+            id: 1,
+            label: '一级 1',
             children: [{
-              label: '三级 1-1-1'
+              id: 4,
+              label: '二级 1-1',
+              children: [{
+                id: 9,
+                label: '三级 1-1-1'
+              }, {
+                id: 10,
+                label: '三级 1-1-2'
+              }]
             }]
-          }]
-        }, {
-          label: '一级 2',
-          children: [{
-            label: '二级 2-1',
+          },
+          {
+            id: 2,
+            label: '一级 2',
             children: [{
-              label: '三级 2-1-1'
+              id: 5,
+              label: '二级 2-1'
+            }, {
+              id: 6,
+              label: '二级 2-2'
             }]
-          }, {
-            label: '二级 2-2',
+          },
+          {
+            id: 3,
+            label: '一级 3',
             children: [{
-              label: '三级 2-2-1'
+              id: 7,
+              label: '二级 3-1'
+            }, {
+              id: 8,
+              label: '二级 3-2'
             }]
-          }]
-        }, {
-          label: '一级 3',
-          children: [{
-            label: '二级 3-1',
-            children: [{
-              label: '三级 3-1-1'
-            }]
-          }, {
-            label: '二级 3-2',
-            children: [{
-              label: '三级 3-2-1'
-            }]
-          }]
-        }],
+          }
+        ],
         defaultProps: {
           children: 'children',
           label: 'label'
-        }
+        },
+        onEditable: false,
       };
-    },
-    methods: {
-      handleNodeClick(data) {
-        console.log(data);
-      }
     }
   };
 </script>
 ```
 :::
-<!-- 
+<!--
+        
 ### 可选择
 
 适用于需要选择层级时使用。在下例中，由于在点击时才进行该层数据的获取，导致层级不可预知，如果没有下层数据，则点击后下拉按钮会消失。
