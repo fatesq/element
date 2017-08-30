@@ -1,13 +1,13 @@
 <template>
   <div class="el-tree" :class="{ 'el-tree--highlight-current': highlightCurrent }">
-    <el-tree-node
+    <cs-tree-node
       v-for="child in root.childNodes"
       :node="child"
       :props="props"
       :key="getNodeKey(child)"
       :render-content="renderContent"
       @node-expand="handleNodeExpand">
-    </el-tree-node>
+    </cs-tree-node>
     <div class="el-tree__empty-block" v-if="!root.childNodes || root.childNodes.length === 0">
       <span class="el-tree__empty-text">{{ emptyText }}</span>
     </div>
@@ -25,14 +25,15 @@
     mixins: [emitter],
 
     components: {
-      ElTreeNode: require('./cs-tree-node.vue')
+      CsTreeNode: require('./cs-tree-node.vue')
     },
 
     data() {
       return {
         store: null,
         root: null,
-        currentNode: null
+        currentNode: null,
+        onEditable: null
       };
     },
 
@@ -86,6 +87,12 @@
       indent: {
         type: Number,
         default: 16
+      },
+      config: {
+        type: Object,
+        default() {
+          return {};
+        }
       }
     },
 
@@ -119,6 +126,9 @@
     },
 
     methods: {
+      selectEditable(e) {
+        this.onEditable = !this.onEditable;
+      },
       filter(value) {
         if (!this.filterNodeMethod) throw new Error('[Tree] filterNodeMethod is required when filter');
         this.store.filter(value);

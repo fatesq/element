@@ -32,13 +32,13 @@
       <div
         class="el-tree-node__children"
         v-show="expanded">
-        <el-tree-node
+        <cs-tree-node
           :render-content="renderContent"
           v-for="child in node.childNodes"
           :key="getNodeKey(child)"
           :node="child"
           @node-expand="handleChildNodeExpand">
-        </el-tree-node>
+        </cs-tree-node>
       </div>
     </el-collapse-transition>
   </div>
@@ -50,9 +50,9 @@
   import emitter from 'element-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElTreeNode',
+    name: 'CsTreeNode',
 
-    componentName: 'ElTreeNode',
+    componentName: 'CsTreeNode',
 
     mixins: [emitter],
 
