@@ -29,6 +29,14 @@
       <node-content :node="node"></node-content>
     </div>
     <el-collapse-transition>
+      <div :style="{ 'padding-left': (node.level + 1) * tree.indent + 'px' }">
+        <div class="el-tree-node__add" v-show="expanded">
+          <p style="color: #20a0ff"><i class="el-icon-plus" style="margin-right: 5px;"></i><span>新建目录</span></p>
+        </div>
+      </div>
+      <!-- v-show="onEditable && config.isAddable" -->
+    </el-collapse-transition>
+    <el-collapse-transition>
       <div
         class="el-tree-node__children"
         v-show="expanded">
