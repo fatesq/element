@@ -47,7 +47,7 @@
     </div>
     <el-collapse-transition>
       <div :style="{ 'padding-left': (node.level + 1) * tree.indent + 'px' }" v-show="node.isAddable">
-        <div class="el-tree-node__add">
+        <div class="el-tree-node__add" @click.stop="handleAppendNode(node)">
           <p style="color: #20a0ff"><i class="el-icon-plus" style="margin-right: 5px;"></i><span>新建目录</span></p>
         </div>
       </div>
@@ -211,6 +211,16 @@
           default:
             break;
         }
+      },
+
+      handleAppendNode() {
+        console.log(this);
+        const parent = this.$parent;
+        const node = this.node;
+        const data = node.data;
+        const store = node.store;
+        // parent.renderContent.call(parent._renderProxy, h, { _self: parent.tree.$vnode.context, node, data, store })
+        // store.append({ label: 'testtest', children: [] }, this.$parent._renderProxy);
       }
     },
 
