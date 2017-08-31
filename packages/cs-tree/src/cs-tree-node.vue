@@ -26,6 +26,7 @@
         v-if="node.loading"
         class="el-tree-node__loading-icon el-icon-loading">
       </span>
+      <node-content :node="node"></node-content>
       <el-dropdown style="float: right;transform: rotate(90deg);"
                    :style="{'padding-right': tree.indent + 'px'}"
                    @click.native.stop
@@ -34,11 +35,12 @@
           <i class="el-icon-more el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item v-show="node.isEditable">重命名</el-dropdown-item>
+          <!-- @click -->
+          <el-dropdown-item v-show="node.isEditable"
+                            >重命名</el-dropdown-item>
           <el-dropdown-item v-show="node.isDelable">删除</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <node-content :node="node"></node-content>
     </div>
     <el-collapse-transition>
       <div :style="{ 'padding-left': (node.level + 1) * tree.indent + 'px' }" v-show="node.isAddable">
