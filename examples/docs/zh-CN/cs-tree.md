@@ -172,7 +172,9 @@
 
     methods: {
       editTree() {
-        this.onEditable = !this.onEditable;
+        this.onEditable = !this.onEditable;        
+        this.$refs.tree2.edit(this.onEditable);
+        /*config.onEditable = !config.onEditable;*/
       },
       handleCheckChange(data, checked, indeterminate) {
         console.log(data, checked, indeterminate);
