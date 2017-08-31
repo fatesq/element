@@ -29,8 +29,8 @@
       <node-content :node="node"></node-content>
     </div>
     <el-collapse-transition>
-      <div :style="{ 'padding-left': (node.level + 1) * tree.indent + 'px' }">
-        <div class="el-tree-node__add" v-show="expanded">
+      <div :style="{ 'padding-left': (node.level + 1) * tree.indent + 'px' }" v-show="node.isAddable">
+        <div class="el-tree-node__add">
           <p style="color: #20a0ff"><i class="el-icon-plus" style="margin-right: 5px;"></i><span>新建目录</span></p>
         </div>
       </div>
