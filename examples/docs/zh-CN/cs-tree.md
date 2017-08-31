@@ -163,10 +163,6 @@
     watch: {
       filterText(val) {
         this.$refs.tree2.filter(val);
-      },
-      onEditable(val) {
-        /*console.log(111, val);*/
-        this.$refs.tree2.edit(val);
       }
     },
 
