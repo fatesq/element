@@ -61,6 +61,25 @@ export default class TreeStore {
     traverse(this);
   }
 
+  /**
+   * 展示新增节点
+   */
+  edit(value) {
+    const config = this.config || {};
+    const traverse = function(node) {
+      node.isAddable = value && config.isAddable;
+      node.isEditable = value && config.isEditable;
+      node.isDelable = value && config.isDelable;
+      node.isShowEditBar = node.isEditable || node.isDelable;
+      const childNodes = node.root ? node.root.childNodes : node.childNodes;
+      childNodes.forEach((child) => {
+        traverse(child);
+      });
+    };
+
+    traverse(this);
+  }
+
   setData(newVal) {
     const instanceChanged = newVal !== this.root.data;
     this.root.setData(newVal);
