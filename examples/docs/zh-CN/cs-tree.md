@@ -300,7 +300,6 @@
   v-model="filterText"
   class="m-t">
 </el-input>
-<!-- <el-cs-tree :data="data" :props="defaultProps" :config="config" @node-click="handleNodeClick"></el-cs-tree> -->
 <cs-tree
   class="filter-tree"
   :data="data2"
