@@ -1,6 +1,12 @@
 <template>
   <div class="el-tree" :class="{ 'el-tree--highlight-current': highlightCurrent }">
-    <div v-if="onEditable">在编辑中</div>
+    <el-collapse-transition>
+      <div style="padding-left: 15px;">
+        <div class="el-tree-node__add">
+          <p style="color: #20a0ff"><i class="el-icon-plus" style="margin-right: 5px;"></i><span>新建目录</span></p>
+        </div>
+      </div>
+    </el-collapse-transition>
     <cs-tree-node
       v-for="child in root.childNodes"
       :node="child"
