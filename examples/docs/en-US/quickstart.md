@@ -237,6 +237,7 @@ import {
   TabPane,
   Tag,
   Tree,
+  CsTree,
   Alert,
   Slider,
   Icon,
@@ -301,6 +302,7 @@ Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(Tag)
 Vue.use(Tree)
+Vue.use(CsTree)
 Vue.use(Alert)
 Vue.use(Slider)
 Vue.use(Icon)
