@@ -138,8 +138,8 @@
         this.store.filter(value);
       },
       edit(value) {
-        console.log(999, value);
-        // this.onEditable = value;
+        // if (!this.editorMethod) throw new Error('[Tree] filterNodeMethod is required when filter');
+        this.store.edit(value);
       },
       getNodeKey(node, index) {
         const nodeKey = this.nodeKey;
