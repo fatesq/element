@@ -303,7 +303,7 @@
   class="m-t">
 </el-input>
 <!-- <el-cs-tree :data="data" :props="defaultProps" :config="config" @node-click="handleNodeClick"></el-cs-tree> -->
-<el-tree
+<cs-tree
   class="filter-tree"
   :data="data2"
   :props="defaultProps"
@@ -312,7 +312,7 @@
   ref="tree2"
   default-expand-all
   show-checkbox>
-</el-tree>
+</cs-tree>
 
 <script>
   export default {

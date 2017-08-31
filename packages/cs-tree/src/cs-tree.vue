@@ -21,7 +21,7 @@
   import emitter from 'element-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElCsTree',
+    name: 'CsTree',
 
     mixins: [emitter],
 
