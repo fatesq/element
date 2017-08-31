@@ -306,6 +306,7 @@
   :props="defaultProps"
   :filter-node-method="filterNode"
   :indent="15"
+  :config="config"
   ref="tree2"
   default-expand-all
   show-checkbox>
