@@ -1,7 +1,7 @@
 <template>
   <div class="el-tree" :class="{ 'el-tree--highlight-current': highlightCurrent }">
     <el-collapse-transition>
-      <div style="padding-left: 15px;">
+      <div style="padding-left: 15px;" v-show="config.isAddable && store.isAddable">
         <div class="el-tree-node__add">
           <p style="color: #20a0ff"><i class="el-icon-plus" style="margin-right: 5px;"></i><span>新建目录</span></p>
         </div>
@@ -39,14 +39,13 @@
       return {
         store: null,
         root: null,
-        currentNode: null,
-        onEditable: null
+        currentNode: null
       };
     },
 
     props: {
       data: {
-        type: Array
+        type: [Array, Object]
       },
       emptyText: {
         type: String,
@@ -186,7 +185,9 @@
         defaultExpandedKeys: this.defaultExpandedKeys,
         autoExpandParent: this.autoExpandParent,
         defaultExpandAll: this.defaultExpandAll,
-        filterNodeMethod: this.filterNodeMethod
+        filterNodeMethod: this.filterNodeMethod,
+        config: this.config,
+        isAddable: null
       });
 
       this.root = this.store.root;
