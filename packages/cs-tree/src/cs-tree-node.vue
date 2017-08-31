@@ -26,19 +26,22 @@
         v-if="node.loading"
         class="el-tree-node__loading-icon el-icon-loading">
       </span>
-      <node-content :node="node"></node-content>
+      <!-- <node-content :node="node"></node-content> -->
+      <span class="el-tree-node__label" v-show="!node.onEditable">{{ node.label }}</span>
+      <el-input v-model="node.label" placeholder="" v-show="node.onEditable"
+                class="el-tree-node__label" style="width: auto;"
+                @blur.stop="handleCompleteEdit(node)" autofocus></el-input>
       <el-dropdown style="float: right;transform: rotate(90deg);"
                    :style="{'padding-right': tree.indent + 'px'}"
                    @click.native.stop
-                   v-show="node.isShowEditBar">
+                   v-show="node.isShowEditBar"
+                   @command="handleNodeEditable">
         <span class="el-dropdown-link">
           <i class="el-icon-more el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <!-- @click -->
-          <el-dropdown-item v-show="node.isEditable"
-                            >重命名</el-dropdown-item>
-          <el-dropdown-item v-show="node.isDelable">删除</el-dropdown-item>
+          <el-dropdown-item v-show="node.isEditable" command="onEditable">重命名</el-dropdown-item>
+          <el-dropdown-item v-show="node.isDelable" command="onDelable">删除</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -48,7 +51,6 @@
           <p style="color: #20a0ff"><i class="el-icon-plus" style="margin-right: 5px;"></i><span>新建目录</span></p>
         </div>
       </div>
-      <!-- v-show="onEditable && config.isAddable" -->
     </el-collapse-transition>
     <el-collapse-transition>
       <div
@@ -185,6 +187,11 @@
       handleChildNodeExpand(nodeData, node, instance) {
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
         this.tree.$emit('node-expand', nodeData, node, instance);
+      },
+
+      handleCompleteEdit(node) {
+        node.onEditable = false;
+      },
       }
     },
 
