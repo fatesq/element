@@ -88,6 +88,7 @@ export default class Node {
     this.isShowEditBar = false;
     this.isEditable = false;
     this.isDelable = false;
+    this.onEditable = false;
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {
