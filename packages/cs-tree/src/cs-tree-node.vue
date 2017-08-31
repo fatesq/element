@@ -195,6 +195,22 @@
         node.onEditable = false;
         this.tree.$emit('node-label-change', node.data);
       },
+
+      handleNodeEditable(command) {
+        const parent = this.$parent;
+        const node = this.node;
+        const data = node.data;
+        const store = node.store;
+        switch(command) {
+          case 'onDelable':
+            // store.remove(store, data);
+            break;
+          case 'onEditable':
+            this.node.onEditable = true;
+            break;
+          default:
+            break;
+        }
       }
     },
 
