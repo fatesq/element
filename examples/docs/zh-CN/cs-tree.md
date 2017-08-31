@@ -255,6 +255,10 @@
       filterNode(value, data) {
         if (!value) return true;
         return data.label.indexOf(value) !== -1;
+      },
+
+      handleLabelChange(node) {
+        console.log('rename success', node.label);
       }
     },
 
@@ -309,7 +313,8 @@
   :config="config"
   ref="tree2"
   default-expand-all
-  show-checkbox>
+  show-checkbox
+  @node-label-change="handleLabelChange">
 </cs-tree>
 
 <script>
