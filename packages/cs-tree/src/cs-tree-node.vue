@@ -28,9 +28,9 @@
       </span>
       <!-- <node-content :node="node"></node-content> -->
       <span class="el-tree-node__label" v-show="!node.onEditable">{{ node.label }}</span>
-      <el-input v-model="node.label" placeholder="" v-show="node.onEditable"
+      <el-input :value="node.label" placeholder="" v-show="node.onEditable"
                 class="el-tree-node__label" style="width: auto;"
-                @blur.stop="handleCompleteEdit(node)" autofocus></el-input>
+                @blur="handleCompleteEdit($event)" autofocus></el-input>
       <el-dropdown style="float: right;transform: rotate(90deg);"
                    :style="{'padding-right': tree.indent + 'px'}"
                    @click.native.stop
@@ -189,8 +189,11 @@
         this.tree.$emit('node-expand', nodeData, node, instance);
       },
 
-      handleCompleteEdit(node) {
+      handleCompleteEdit(event) {
+        const node = this.node;
+        node.data.label = event.target.value;
         node.onEditable = false;
+        this.tree.$emit('node-label-change', node.data);
       },
       }
     },
