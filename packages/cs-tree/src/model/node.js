@@ -78,12 +78,16 @@ export default class Node {
   constructor(options) {
     this.id = nodeIdSeed++;
     this.text = null;
-    this.checked = false;
-    this.indeterminate = false;
+    this.checked = this.checked || false;
+    this.indeterminate = this.indeterminate || false;
     this.data = null;
-    this.expanded = false;
+    this.expanded = this.expanded || false;
     this.parent = null;
-    this.visible = true;
+    this.visible = this.visible || true;
+    this.isAddable = this.isAddable || false;
+    this.isShowEditBar = this.isShowEditBar || false;
+    this.isEditable = this.isEditable || false;
+    this.isDelable = this.isDelable || false;
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {
